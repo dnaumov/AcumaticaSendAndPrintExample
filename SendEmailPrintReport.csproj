@@ -5,34 +5,36 @@
     <OutputType>Library</OutputType>
     <RootNamespace>SendEmailPrintReport</RootNamespace>
     <AssemblyName>SendEmailPrintReport</AssemblyName>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Company>Acumatica</Company>
     <FileVersion>26.100.0168</FileVersion>
     <InformationalVersion>26.100.0168</InformationalVersion>
     <Copyright>Copyright © 2005-2026 Acumatica, Inc. All rights reserved.</Copyright>
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	<OutputPath>CustomizationProject\bin/</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PX.Common">
-      <HintPath>..\..\..\..\Bin\PX.Common.dll</HintPath>
+      <HintPath>..\..\..\Acumatica Sites\26r1\Bin\PX.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Common.Std">
-      <HintPath>..\..\..\..\Bin\PX.Common.Std.dll</HintPath>
+      <HintPath>..\..\..\Acumatica Sites\26r1\Bin\PX.Common.Std.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.CS.Contracts">
-      <HintPath>..\..\..\..\Bin\PX.CS.Contracts.dll</HintPath>
+      <HintPath>..\..\..\Acumatica Sites\26r1\Bin\PX.CS.Contracts.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data">
-      <HintPath>..\..\..\..\Bin\PX.Data.dll</HintPath>
+      <HintPath>..\..\..\Acumatica Sites\26r1\Bin\PX.Data.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data.BQL.Fluent">
-      <HintPath>..\..\..\..\Bin\PX.Data.BQL.Fluent.dll</HintPath>
+      <HintPath>..\..\..\Acumatica Sites\26r1\Bin\PX.Data.BQL.Fluent.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Objects">
-      <HintPath>..\..\..\..\Bin\PX.Objects.DLL</HintPath>
+      <HintPath>..\..\..\Acumatica Sites\26r1\Bin\PX.Objects.DLL</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
