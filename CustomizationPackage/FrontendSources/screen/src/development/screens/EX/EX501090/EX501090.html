@@ -1,0 +1,15 @@
+<template>
+	<qp-template id="form_template" name="1">
+		<qp-fieldset id="form" view.bind="FilterView" slot="A">
+			<qp-field id="ProcessingAction"></qp-field>
+		</qp-fieldset>
+	</qp-template>
+	<qp-grid id="grid" view.bind="RecordsView">
+			<qp-grid-column field="Selected"></qp-grid-column>
+			<qp-grid-column field="CashAccountID"></qp-grid-column>
+			
+			<qp-grid-column field="DocDate"></qp-grid-column>
+			<qp-grid-column field="RefNbr"></qp-grid-column>
+			<qp-grid-column field="Status" ></qp-grid-column>
+	</qp-grid>
+</template>
