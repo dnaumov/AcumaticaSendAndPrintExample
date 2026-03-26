@@ -45,6 +45,14 @@ namespace SendEmailPrintReport
 			RecordsView.Cache.AllowDelete = false;
 
 		}
+		protected virtual void _(Events.RowSelecting<CADepositWithSelected> e)
+		{
+			if (e.Row != null && FilterView.Current?.ProcessingAction == "R"
+				&& e.Row.Status == CADocStatus.Released)
+			{
+				e.Cancel = true;
+			}
+		}
 		protected virtual void _(Events.RowSelected<PrintSendProcessFilter> e)
 		{
 			if (e.Row != null)
@@ -114,7 +122,7 @@ namespace SendEmailPrintReport
 					graph.Document.Current = graph.Document.Search<CADeposit.refNbr>(recordToRelease.RefNbr, recordToRelease.DocType);
 					if (graph.Document.Current == null)
 					{
-						throw new PXException("Deposit {0} {1} was not found.", recordToRelease.DocType, recordToRelease.RefNbr);
+						throw new PXException("Deposit {0} of type {1} was not found.", recordToRelease.RefNbr, recordToRelease.DocType);
 					}
 					graph.release.Press();
 					PXProcessing.SetProcessed();
