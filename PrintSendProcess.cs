@@ -2,6 +2,7 @@ using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Objects.CA;
 
+using System;
 using System.Collections.Generic;
 
 namespace SendEmailPrintReport
@@ -21,7 +22,7 @@ namespace SendEmailPrintReport
 			#region ProcessingAction
 			[PXString]
 			[PXDefault("P")]
-			[PXStringList(new string[] { "P", "E" }, new string[] { "Print", "Email" })]
+			[PXStringList(new string[] { "P", "E", "R" }, new string[] { "Print", "Email", "Release" })]
 			[PXUIField(DisplayName = "Action")]
 			public virtual string ProcessingAction { get; set; }
 			public abstract class processingAction : PX.Data.BQL.BqlString.Field<processingAction> { }
@@ -55,6 +56,10 @@ namespace SendEmailPrintReport
 				else if (e.Row.ProcessingAction == "E")
 				{
 					RecordsView.SetProcessDelegate(EmailRecords);
+				}
+				else if (e.Row.ProcessingAction == "R")
+				{
+					RecordsView.SetProcessDelegate(ReleaseRecords);
 				}
 			}
 		}
@@ -95,6 +100,29 @@ namespace SendEmailPrintReport
 				var depostitGraphExt = graph.GetExtension<CADepositEntry_ActivityDetailsExt>();
 				depostitGraphExt.EmailDocument();
 				PXProcessing.SetProcessed();
+			}
+		}
+		public static void ReleaseRecords(List<CADepositWithSelected> list)
+		{
+			var graph = PXGraph.CreateInstance<CADepositEntry>();
+			foreach (var recordToRelease in list)
+			{
+				PXProcessing.SetCurrentItem(recordToRelease);
+				try
+				{
+					graph.Clear();
+					graph.Document.Current = graph.Document.Search<CADeposit.refNbr>(recordToRelease.RefNbr, recordToRelease.DocType);
+					if (graph.Document.Current == null)
+					{
+						throw new PXException("Deposit {0} {1} was not found.", recordToRelease.DocType, recordToRelease.RefNbr);
+					}
+					graph.release.Press();
+					PXProcessing.SetProcessed();
+				}
+				catch (Exception e)
+				{
+					PXProcessing.SetError(e);
+				}
 			}
 		}
 	}
